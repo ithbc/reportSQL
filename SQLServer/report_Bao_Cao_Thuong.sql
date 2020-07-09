@@ -47,7 +47,13 @@ select CorpName = 'HBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBCCORP.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBCCORP.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].HBCCORP.dbo.ORCT t1,
+										[192.168.3.9].HBCCORP.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].HBCCORP.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -118,7 +124,13 @@ select CorpName = 'KBI',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].KBI.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].KBI.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].KBI.dbo.ORCT t1,
+										[192.168.3.9].KBI.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].KBI.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -189,7 +201,13 @@ select CorpName = 'AKBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].AKBC.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].AKBC.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].AKBC.dbo.ORCT t1,
+										[192.168.3.9].AKBC.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].AKBC.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -260,7 +278,13 @@ select CorpName = 'HHBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_DN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_DN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].HBC_DN.dbo.ORCT t1,
+										[192.168.3.9].HBC_DN.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].HBC_DN.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -331,7 +355,13 @@ select CorpName = 'TBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_HN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_HN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].HBC_HN.dbo.ORCT t1,
+										[192.168.3.9].HBC_HN.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].HBC_HN.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -402,7 +432,13 @@ select CorpName = 'AKiBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_LA.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_LA.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].HBC_LA.dbo.ORCT t1,
+										[192.168.3.9].HBC_LA.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].HBC_LA.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -424,6 +460,7 @@ Group By a.DocEntry,a.DocStatus,a.CardCode,a.CardName,d.SlpName,c.GroupName,g.It
 ) t1
 
 UNION 
+
 select *,
 		case 
 			when ItmsGrpNam = N'08_MPĐ xăng' then N'08_MPĐ xăng'
@@ -472,7 +509,13 @@ select CorpName = 'GiBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_TN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_TN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].HBC_TN.dbo.ORCT t1,
+										[192.168.3.9].HBC_TN.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].HBC_TN.dbo.OMRC  where FirmCode = f.FirmCode)
@@ -543,7 +586,13 @@ select CorpName = 'LBCTT',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	end as 'BPType'
 ,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].LBC_TT.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].LBC_TT.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
-			when e.TargetType = -1 then 'S'
+			when a.DocEntry not in (select t2.DocEntry 
+									FROM 
+										[192.168.3.9].LBC_TT.dbo.ORCT t1,
+										[192.168.3.9].LBC_TT.dbo.RCT2 t2
+									where 
+									YEAR(t1.DocDate) = 2020 and 
+									t1.DocEntry = t2.DocNum and  t2.InvType = 13 ) then 'S'
 			ELSE 'D'
 		END as 'TargetType',
 		FirmName = (select FirmName from [192.168.3.9].LBC_TT.dbo.OMRC  where FirmCode = f.FirmCode)
