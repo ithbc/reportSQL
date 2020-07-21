@@ -1,4 +1,6 @@
-﻿select * FROM 
+﻿create view BaoCaoThuongHBG
+as
+select * FROM 
 (select *,
 		case 
 			when ItmsGrpNam = N'08_MPĐ xăng' then N'08_MPĐ xăng'
@@ -45,7 +47,7 @@ select CorpName = 'HBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].HBCCORP.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBCCORP.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBCCORP.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].HBCCORP.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBCCORP.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -122,7 +124,7 @@ select CorpName = 'KBI',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].KBI.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].KBI.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].KBI.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].KBI.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].KBI.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -199,7 +201,7 @@ select CorpName = 'AKBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].AKBC.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].AKBC.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].AKBC.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].AKBC.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].AKBC.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -276,7 +278,7 @@ select CorpName = 'HHBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].HBC_DN.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_DN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_DN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].HBC_DN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_DN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -353,7 +355,7 @@ select CorpName = 'TBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].HBC_HN.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_HN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_HN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].HBC_HN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_HN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -430,7 +432,7 @@ select CorpName = 'AKiBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].HBC_LA.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_LA.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_LA.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].HBC_LA.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_LA.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -507,7 +509,7 @@ select CorpName = 'GiBC',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].HBC_TN.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].HBC_TN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_TN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].HBC_TN.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].HBC_TN.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
@@ -584,7 +586,7 @@ select CorpName = 'LBCTT',a.DocEntry,a.DocStatus,a.CardCode,a.CardName,
 	when YEAR(b.CreateDate) = 2020 and MONTH(b.CreateDate) <= 6 and MONTH(b.CreateDate) >= 4  and a.DocEntry =  (select min(g.docentry) from [192.168.3.9].LBC_TT.dbo.OINV g where g.cardcode =a.CardCode) then 'N'
 	ELSE 'O'
 	end as 'BPType'
-,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.ReconDate) FROM [192.168.3.9].LBC_TT.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].LBC_TT.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
+,b.CreateDate,d.SlpName,c.GroupName,g.ItmsGrpNam,f.ItemName,e.LineTotal,PaidDate=(select max(t1.CreateDate) FROM [192.168.3.9].LBC_TT.dbo.OITR t1 where ReconNum in (select ReconNum FROM [192.168.3.9].LBC_TT.dbo.ITR1  t2 where t2.SrcObjTyp = 13 and t2.SrcObjAbs = a.docentry ))
 		,CASE 
 			when a.DocEntry not in (select t2.DocEntry 
 									FROM 
